@@ -1,0 +1,152 @@
+body {
+  background-color: #202020;
+  min-height: 100vh;
+}
+
+main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 50%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.delivery {
+  border-radius: 8px;
+  background-color: #282828;
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.check-icon {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.2rem;
+}
+
+.check-icon img {
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#order-status {
+  font-weight: bold;
+  color: #40ff70;
+}
+
+.warning-text {
+  color: red;
+}
+
+.update-button,
+.review-button {
+  position: relative;
+  background-color: #505050;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  font-size: large;
+  cursor: pointer;
+}
+
+.review-button {
+  display: none;
+}
+
+.update-button:after,
+.review-button:after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: blue;
+  transition: all 0.3s;
+}
+
+.update-button:hover:after,
+.review-button:hover:after {
+  width: 100%;
+}
+
+.update-button:disabled {
+  color: grey;
+  cursor: not-allowed;
+}
+
+.update-button:disabled:hover:after {
+  width: 0;
+}
+
+.delete-button {
+  float: right;
+  position: relative;
+  background-color: #505050;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  font-size: large;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-button:after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: red;
+  transition: all 0.3s;
+}
+
+.delete-button:hover {
+  color: red;
+}
+
+.delete-button:hover:after {
+  width: 100%;
+}
+
+.update-button:disabled {
+  color: grey;
+  cursor: not-allowed;
+}

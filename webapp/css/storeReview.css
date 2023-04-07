@@ -1,0 +1,33 @@
+:root {
+  --border-radius: 8px;
+}
+
+body {
+  background-color: #202020;
+}
+
+main {
+  color: white;
+  margin: auto;
+  margin-top: 10px;
+  width: 80%;
+}
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.warning-text {
+  color: red;
+}
+
+.section {
+  border-radius: var(--border-radius);
+  background-color: #282828;
+  padding: 1rem;
+  width: 100%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--Looking for resources under class path-->
+    <properties resource="db.properties"/>
+    <!-- enable lazy load-->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <!-- All classes under this package will be automatically aliased.
+             The alias is the class short name.
+             It is not case-sensitive. -->
+        <package name="model"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <!--Native JDBC code to manage transactions-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--The XML file must be placed together with the interface.
+            And the names are consistent.-->
+        <package name="mapper"/>
+    </mappers>
+</configuration>

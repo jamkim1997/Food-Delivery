@@ -1,0 +1,94 @@
+body {
+  background-color: #202020;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  font-size: large;
+}
+
+main {
+  width: 98%;
+  overflow-x: hidden;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-item {
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  overflow: hidden;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  width: 100%;
+  height: 3em;
+}
+
+.order-received {
+  background-color: rgb(155, 155, 0);
+}
+
+.order-cancel,
+.order-done {
+  color: white;
+  border: none;
+  height: 100%;
+  font-size: larger;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.order-cancel {
+  background-color: red;
+}
+
+.order-done {
+  background-color: green;
+}
+
+.order-no {
+  text-align: center;
+}
+
+.food-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.food-comment {
+  color: red;
+}
+
+.food-list td {
+  word-break: break-word;
+  color: black;
+  padding: 5px;
+}
+
+.food-list td:nth-child(2) {
+  font-weight: bold;
+  word-break: keep-all;
+}
+
+.food-list tr:nth-child(odd) {
+  background-color: #dcdcdc;
+}
+
+.food-list tr:last-child {
+  border-bottom: 3px solid #dcdcdc;
+}
+
+.instructions {
+  color: black;
+  word-break: break-word;
+  margin: 5px;
+}

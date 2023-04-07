@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapper">
+    <resultMap id="userMap" type="User">
+        <id property="UserID" column="UserID"/>
+        <result property="fname" column="First_Name"/>
+        <result property="lname" column="Last_Name"/>
+        <result property="pass" column="Password"/>
+        <result property="email" column="Email"/>
+        <result property="phoneNo" column="PhoneNo"/>
+        <result property="dob" column="DOB" javaType="java.sql.Date"/>
+        <result property="streetNo" column="Street_Number"/>
+        <result property="streetName" column="Street_Name"/>
+        <result property="postcode" column="Postcode"/>
+        <result property="state" column="State"/>
+        <result property="suburb" column="Suburb"/>
+        <result property="country" column="Country"/>
+        <result property="activated" column="Activated"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="userMap">
+        select * from user where UserID = #{UserID}
+    </select>
+
+</mapper>

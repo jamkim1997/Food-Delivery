@@ -1,0 +1,154 @@
+:root {
+  --border-radius: 8px;
+}
+
+body {
+  background-color: #202020;
+}
+
+main {
+  margin: 10px;
+  color: white;
+}
+
+.section {
+  border-radius: var(--border-radius);
+  background-color: #282828;
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.delivery-details {
+  border-radius: var(--border-radius);
+  background-color: #282828;
+  padding: 1rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.assigned-deliveries,
+.available-deliveries {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+}
+
+.assigned-deliveries {
+  background-color: tomato;
+}
+
+.available-deliveries {
+  background-color: darkseagreen;
+}
+
+.title {
+  text-align: center;
+  position: sticky;
+  top: 56px;
+  line-height: 1.8em;
+  background-color: inherit;
+  border-radius: var(--border-radius);
+  letter-spacing: 1.25px;
+  z-index: 1;
+}
+
+.body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.check-icon {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.2rem;
+}
+
+.check-icon img {
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+#order-status {
+  font-weight: bold;
+  color: #40ff70;
+}
+
+.warning-text {
+  color: red;
+}
+
+.cancel-button,
+.done-button,
+.accept-button {
+  position: relative;
+  background-color: #505050;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  font-size: large;
+  cursor: pointer;
+}
+
+.cancel-button {
+  float: right;
+}
+
+.cancel-button:hover {
+  color: red;
+}
+
+.done-button:hover {
+  color: blue;
+}
+
+.done-button:disabled {
+  color: grey;
+  cursor: not-allowed;
+}
+
+.done-button:disabled:hover {
+  color: grey;
+  cursor: not-allowed;
+}
+
+.accept-button:hover {
+  color: chartreuse;
+}

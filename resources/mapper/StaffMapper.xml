@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Aliasing is not permitted for the namespace.
+     The fully qualified interface name must be written-->
+<mapper namespace="mapper.StaffMapper">
+    <!-- Specify the correspondence between field names of database tables and property names of Java classes.
+         type: class name of Javabean.-->
+    <resultMap id="staffMap" type="Staff">
+        <!-- If there is a primary key, configure an ID tag.
+             As it can improve the efficiency of Mybatis.
+             This is not compulsory.-->
+        <!-- property value: name of the attribute of the bean class.-->
+        <!-- column value: name of the field in database table.-->
+        <id property="staffID" column="Staff_ID"/>
+        <result property="restaurantID" column="Restaurant_ID"/>
+        <result property="privilege" column="Privilege"/>
+        <result property="position" column="Position"/>
+        <result property="UserID" column="UserID"/>
+        <result property="fname" column="First_Name" />
+        <result property="lname" column="Last_Name"/>
+        <result property="pass" column="Password"/>
+        <result property="email" column="Email"/>
+        <result property="phoneNo" column="PhoneNo"/>
+        <result property="dob" column="DOB" />
+        <result property="streetNo" column="Street_Number"/>
+        <result property="streetName" column="Street_Name"/>
+        <result property="postcode" column="Postcode"/>
+        <result property="state" column="State"/>
+        <result property="suburb" column="Suburb"/>
+        <result property="country" column="Country"/>
+        <result property="activated" column="Activated"/>
+        <!--    abandon
+            A staff object is associated with a user object.
+        <association property="user"
+                     select="mapper.UserMapper.selectById"
+                     column="UserID"/> -->
+    </resultMap>
+
+    <select id="selectById" resultMap="staffMap">
+        select * from staff s join user u on s.UserID = u.UserID where Staff_ID = #{staffID}
+    </select>
+
+    <select id="selectStaffByRestaurantIDAndPrivilegeRange" resultMap="staffMap">
+        select * from staff s join user u on s.UserID = u.UserID where Restaurant_ID = #{restaurantId} and (Privilege between #{privilege1} and #{privilege2})
+    </select>
+    
+    <update id="updateById">
+        update staff
+        <set>
+            <if test="staffId != null">Staff_ID = #{staffId},</if>
+            <if test="userId != null">User_ID = #{userId},</if>
+            <if test="restaurantId != null">Restaurant_ID = #{restaurantId},</if>
+            <if test="privilege != null">Privilege = #{privilege},</if>
+            <if test="position != null">Position = #{position}</if>
+        </set>
+        where Staff_ID = #{staffId}
+    </update>
+</mapper>

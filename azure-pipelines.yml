@@ -1,0 +1,66 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  - main
+
+variables:
+  buildConfiguration: 'Release'
+
+stages: 
+  - stage: 'Build'
+    displayName: 'Build webapp'
+    jobs: 
+      - job: 'Build'
+        displayName: 'Build Job'
+        pool:
+          vmImage: ubuntu-latest
+
+        steps:
+          - task: Maven@3.205.1
+            inputs:
+              mavenPomFile: "pom.xml"
+              mavenOptions: "-Xmx3072m"
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "17.0.4"
+              jdkArchitectureOption: "x64"
+              testRunTitle: "Test Run"
+              publishJUnitResults: true
+              testResultsFiles: "**/surefire-reports/TEST-*.xml"
+              goals: "package"
+              
+          - task: CopyFiles@2
+            inputs:
+              contents: '**/*.war'
+              targetFolder: '$(Build.ArtifactStagingDirectory)' 
+              
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+  - stage: 'Deploy'
+    displayName: 'Deploy the web app'
+    dependsOn: Build
+    jobs:
+    - deployment: Deploy
+      pool:
+        vmImage: 'ubuntu-latest'
+      environment: dev
+      variables: 
+      - group: Release
+      strategy: 
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: drop
+            - task: AzureWebApp@1
+              displayName: 'Azure App Service Deploy'
+              inputs:
+                azureSubscription: 'Azure-FDS10'
+                appName: '$(WebAppName)'
+                package: '/home/vsts/work/1/drop/target/FDS-1.0-SNAPSHOT.war'

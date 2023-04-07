@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CouponMapper">
+  <resultMap id="BaseResultMap" type="model.Coupon">
+    <id column="Coupon_ID" jdbcType="INTEGER" property="couponId" />
+    <result column="Coupon_Name" jdbcType="VARCHAR" property="couponName" />
+    <result column="Coupon_Scope" jdbcType="INTEGER" property="couponScope" />
+    <result column="Coupon_Min_Money" jdbcType="INTEGER" property="couponMinMoney" />
+    <result column="Created_Date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="Coupon_Value" jdbcType="DOUBLE" property="couponValue" />
+    <result column="Coupon_Description" jdbcType="VARCHAR" property="couponDescription" />
+    <result column="Coupon_Image" jdbcType="VARCHAR" property="couponImage" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coupon
+    where Coupon_ID = #{couponId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.Coupon">
+    <selectKey keyProperty="couponId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coupon (Coupon_Name, Coupon_Scope, Coupon_Min_Money, 
+      Created_Date, Coupon_Value, Coupon_Description, 
+      Coupon_Image)
+    values (#{couponName,jdbcType=VARCHAR}, #{couponScope,jdbcType=INTEGER}, #{couponMinMoney,jdbcType=INTEGER}, 
+      default, #{couponValue,jdbcType=DOUBLE}, #{couponDescription,jdbcType=VARCHAR},
+      #{couponImage,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="model.Coupon">
+    update coupon
+    set Coupon_Name = #{couponName,jdbcType=VARCHAR},
+      Coupon_Scope = #{couponScope,jdbcType=INTEGER},
+      Coupon_Min_Money = #{couponMinMoney,jdbcType=INTEGER},
+      Coupon_Value = #{couponValue,jdbcType=DOUBLE},
+      Coupon_Description = #{couponDescription,jdbcType=VARCHAR},
+      Coupon_Image = #{couponImage,jdbcType=VARCHAR}
+    where Coupon_ID = #{couponId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select Coupon_ID, Coupon_Name, Coupon_Scope, Coupon_Min_Money, Created_Date, Coupon_Value, 
+    Coupon_Description, Coupon_Image
+    from coupon
+    where Coupon_ID = #{couponId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select Coupon_ID, Coupon_Name, Coupon_Scope, Coupon_Min_Money, Created_Date, Coupon_Value, 
+    Coupon_Description, Coupon_Image
+    from coupon
+  </select>
+
+  <resultMap id="ResInfoMap" type="Restaurant">
+    <id property="restaurantID" column="Restaurant_ID"/>
+    <result property="restaurantName" column="Restaurant_Name"/>
+  </resultMap>
+  <select id="selectResInfo" resultMap="ResInfoMap">
+        select Restaurant_ID, Restaurant_Name from Restaurant
+  </select>
+
+  <resultMap id="ItemInfoMap" type="MenuItem">
+    <id property="itemID" column="Item_ID"/>
+    <result property="description" column="Description"/>
+  </resultMap>
+  <select id="selectItemInfoByResId" resultMap="ItemInfoMap">
+        select Item_ID, Description from menu_item where Restaurant_ID = #{restaurantId}
+  </select>
+
+  <select id="selectOneResById" resultType="string">
+        select Restaurant_ID from Coupon_R where Coupon_ID=#{couponId}
+  </select>
+</mapper>

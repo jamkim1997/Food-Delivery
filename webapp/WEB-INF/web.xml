@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
+
+    <display-name>Food Delivery System</display-name>
+    <welcome-file-list>
+        <welcome-file>ConnServlet</welcome-file>
+        <!--Set ConnServlet to be the file to run on startup-->
+        <!--Used to set default 'startup' files for each folder/directory
+            since subfolders may have their own 'startup' files-->
+        <!--https://stackoverflow.com/questions/35570440/
+            use-of-welcome-file-list-why-can-we-specify-a-list-if-it-would-run-only-one-->
+    </welcome-file-list>
+
+    <filter>
+        <filter-name>SqlSessionFilter</filter-name>
+        <filter-class>filters.SqlSessionFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>filters.UserFilter</filter-class>
+    </filter>
+    <!--Currently filter emp management and coupon -->
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/couponAppStaff.jsp</url-pattern>
+        <url-pattern>/coupon/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SqlSessionFilter</filter-name>
+        <url-pattern>/empManage/*</url-pattern>
+        <url-pattern>/coupon/*</url-pattern>
+    </filter-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
